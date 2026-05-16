@@ -1,0 +1,13 @@
+{
+  "window_title": "Arcade Machine",
+  "library_root": "games",
+  "window_width": 1280,
+  "window_height": 800,
+  "fullscreen": false,
+  "production_mode": false,
+  "enable_controller_bridge": true,
+  "java_command": "java",
+  "grid_columns": 3,
+  "show_mouse_cursor": true,
+  "bridge_log_path": "logs/controller_bridge.log"
+}
