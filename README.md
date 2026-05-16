@@ -1,4 +1,4 @@
 # ArcadeMachine
 code for sac arcade machine
 
-![Key layout](keylayout.png)
+![Key layout](ArcadeUI.png)
