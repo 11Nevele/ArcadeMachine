@@ -66,7 +66,8 @@ class ArcadeLauncherApp:
         self.thumbnail_cache: dict[tuple[str, tuple[int, int]], "pygame.Surface"] = {}
         self.scan_result = LibraryScanResult(games=[], warnings=[])
 
-        pygame.init()
+        pygame.display.init()
+        pygame.font.init()
         pygame.display.set_caption(self.config.window_title)
         pygame.mouse.set_visible(self.config.show_mouse_cursor)
 
