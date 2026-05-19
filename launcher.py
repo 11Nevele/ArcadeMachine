@@ -182,29 +182,36 @@ class ArcadeLauncherApp:
         self._draw()
         pygame.display.flip()
 
+        mixer_state = self._suspend_audio()
+
         try:
             process = subprocess.Popen(command, cwd=str(game.folder))
         except FileNotFoundError:
+            self._restore_audio(mixer_state)
             self.status_message = (
                 "Java was not found. Update java_command in config.json or install Java on this machine."
             )
             return
         except OSError as exc:
+            self._restore_audio(mixer_state)
             self.status_message = f"Failed to launch {game.title}: {exc}"
             return
 
         pygame.display.iconify()
 
-        while process.poll() is None and self.running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    process.terminate()
-                    self.running = False
-            self.clock.tick(10)
+        try:
+            while process.poll() is None and self.running:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        process.terminate()
+                        self.running = False
+                self.clock.tick(10)
 
-        exit_code = process.poll()
-        if exit_code is None:
-            exit_code = process.wait()
+            exit_code = process.poll()
+            if exit_code is None:
+                exit_code = process.wait()
+        finally:
+            self._restore_audio(mixer_state)
 
         self._create_display()
         self.refresh_library(keep_message=True)
@@ -476,6 +483,25 @@ class ArcadeLauncherApp:
             if font_path:
                 break
         return pygame.font.Font(font_path, size)
+
+    def _suspend_audio(self) -> tuple[int, int, int] | None:
+        mixer_state = pygame.mixer.get_init()
+        if mixer_state is None:
+            return None
+
+        pygame.mixer.stop()
+        pygame.mixer.quit()
+        return mixer_state
+
+    def _restore_audio(self, mixer_state: tuple[int, int, int] | None) -> None:
+        if mixer_state is None or pygame.mixer.get_init() is not None:
+            return
+
+        frequency, sample_size, channels = mixer_state
+        try:
+            pygame.mixer.init(frequency=frequency, size=sample_size, channels=channels)
+        except pygame.error:
+            pass
 
     def _get_cover_surface(self, game: GameEntry, size: tuple[int, int]) -> "pygame.Surface":
         cache_key = (str(game.cover_path) if game.cover_path else f"placeholder:{game.slug}", size)
