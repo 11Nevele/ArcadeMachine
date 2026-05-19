@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 from dataclasses import dataclass
+import os
 from pathlib import Path
 import shlex
 import subprocess
@@ -184,6 +185,33 @@ class ArcadeLauncherApp:
         pygame.display.flip()
 
         mixer_state = self._suspend_audio()
+        debug_log_path = self.config.project_root / "logs" / "game_launch.log"
+
+        with debug_log_path.open("a", encoding="utf-8") as debug_log:
+            print("\n===== GAME LAUNCH DEBUG =====", file=debug_log)
+            print(f"game={game.title}", file=debug_log)
+            print(f"config.java_command={self.config.java_command!r}", file=debug_log)
+            print(f"command={command!r}", file=debug_log)
+            print(f"cwd={str(game.folder)!r}", file=debug_log)
+            print(f"jar_path={str(game.jar_path)!r}", file=debug_log)
+            print(f"PATH={os.environ.get('PATH')}", file=debug_log)
+            print(f"USER={os.environ.get('USER')}", file=debug_log)
+            print(f"HOME={os.environ.get('HOME')}", file=debug_log)
+            print(f"XDG_RUNTIME_DIR={os.environ.get('XDG_RUNTIME_DIR')}", file=debug_log)
+            print(f"PULSE_SERVER={os.environ.get('PULSE_SERVER')}", file=debug_log)
+
+            java_version = subprocess.run(
+                [*command[:-2], "-version"],
+                capture_output=True,
+                text=True,
+                cwd=str(game.folder),
+            )
+            print(f"java -version exit={java_version.returncode}", file=debug_log)
+            print("java -version stderr:", file=debug_log)
+            print(java_version.stderr, file=debug_log)
+            print("java -version stdout:", file=debug_log)
+            print(java_version.stdout, file=debug_log)
+            debug_log.flush()
 
         try:
             process = subprocess.Popen(command, cwd=str(game.folder))
