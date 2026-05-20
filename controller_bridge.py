@@ -48,8 +48,13 @@ class ControllerBridgeManager:
                 f"Controller bridge script was not found at {controller_script}."
             )
 
-        self.config.bridge_log_path.parent.mkdir(parents=True, exist_ok=True)
-        self.log_handle = self.config.bridge_log_path.open("a", encoding="utf-8")
+        log_warning: str | None = None
+        try:
+            self.config.bridge_log_path.parent.mkdir(parents=True, exist_ok=True)
+            self.log_handle = self.config.bridge_log_path.open("a", encoding="utf-8")
+        except OSError:
+            self.log_handle = None
+            log_warning = "the bridge log path is not writable"
 
         command = [
             "sudo",
@@ -61,8 +66,8 @@ class ControllerBridgeManager:
             self.process = subprocess.Popen(
                 command,
                 cwd=str(self.config.project_root),
-                stdout=self.log_handle,
-                stderr=subprocess.STDOUT,
+                stdout=self.log_handle if self.log_handle is not None else subprocess.DEVNULL,
+                stderr=subprocess.STDOUT if self.log_handle is not None else subprocess.DEVNULL,
                 text=True,
             )
         except FileNotFoundError as exc:
@@ -73,11 +78,20 @@ class ControllerBridgeManager:
 
         if self.process.poll() is not None:
             self.stop()
+            if self.log_handle is None:
+                raise ControllerBridgeError(
+                    "Controller bridge exited immediately. Log capture was disabled because the bridge log path is not writable."
+                )
             raise ControllerBridgeError(
                 f"Controller bridge exited immediately. Check {self.config.bridge_log_path} for details."
             )
 
-        self.last_status = f"Controller bridge running with PID {self.process.pid}."
+        if log_warning is None:
+            self.last_status = f"Controller bridge running with PID {self.process.pid}."
+        else:
+            self.last_status = (
+                f"Controller bridge running with PID {self.process.pid}; log capture is disabled because {log_warning}."
+            )
 
     def stop(self) -> None:
         if self.process is not None:

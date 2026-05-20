@@ -71,6 +71,8 @@ Start the launcher in production mode from a terminal that can answer a `sudo` p
 ARCADE_PRODUCTION=true python3 launcher.py
 ```
 
+Do not start `launcher.py` itself with `sudo`. The UI and launched games must run as the desktop user so they inherit the active audio session.
+
 When production mode is enabled on Linux, the launcher starts `controller_to_keyboard.py` as a background subprocess and stops it on shutdown.
 
 ## Controls

@@ -603,6 +603,11 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Configuration error: {exc}", file=sys.stderr)
         return 2
 
+    startup_error = _get_startup_error(config)
+    if startup_error is not None:
+        print(startup_error, file=sys.stderr)
+        return 2
+
     prepare_runtime_paths(config)
 
     if args.validate:
@@ -652,6 +657,19 @@ def _validate_configuration(config: LauncherConfig) -> int:
             print(f" - {warning}")
 
     return 0
+
+
+def _get_startup_error(config: LauncherConfig) -> str | None:
+    if not config.is_linux or not hasattr(os, "geteuid"):
+        return None
+
+    if os.geteuid() != 0:
+        return None
+
+    return (
+        "Do not run the launcher with sudo on Linux. Start it as the desktop user so games inherit "
+        "the user audio session; the controller bridge will request sudo separately when production mode is enabled."
+    )
 
 
 def _build_java_command(java_command: str, jar_path: Path, is_windows: bool) -> list[str]:
