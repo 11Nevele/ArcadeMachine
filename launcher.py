@@ -185,33 +185,7 @@ class ArcadeLauncherApp:
         pygame.display.flip()
 
         mixer_state = self._suspend_audio()
-        debug_log_path = self.config.project_root / "logs" / "game_launch.log"
-
-        with debug_log_path.open("a", encoding="utf-8") as debug_log:
-            print("\n===== GAME LAUNCH DEBUG =====", file=debug_log)
-            print(f"game={game.title}", file=debug_log)
-            print(f"config.java_command={self.config.java_command!r}", file=debug_log)
-            print(f"command={command!r}", file=debug_log)
-            print(f"cwd={str(game.folder)!r}", file=debug_log)
-            print(f"jar_path={str(game.jar_path)!r}", file=debug_log)
-            print(f"PATH={os.environ.get('PATH')}", file=debug_log)
-            print(f"USER={os.environ.get('USER')}", file=debug_log)
-            print(f"HOME={os.environ.get('HOME')}", file=debug_log)
-            print(f"XDG_RUNTIME_DIR={os.environ.get('XDG_RUNTIME_DIR')}", file=debug_log)
-            print(f"PULSE_SERVER={os.environ.get('PULSE_SERVER')}", file=debug_log)
-
-            java_version = subprocess.run(
-                [*command[:-2], "-version"],
-                capture_output=True,
-                text=True,
-                cwd=str(game.folder),
-            )
-            print(f"java -version exit={java_version.returncode}", file=debug_log)
-            print("java -version stderr:", file=debug_log)
-            print(java_version.stderr, file=debug_log)
-            print("java -version stdout:", file=debug_log)
-            print(java_version.stdout, file=debug_log)
-            debug_log.flush()
+        _write_game_launch_debug_log(self.config, game, command)
 
         try:
             process = subprocess.Popen(command, cwd=str(game.folder))
@@ -677,6 +651,45 @@ def _build_java_command(java_command: str, jar_path: Path, is_windows: bool) -> 
     if not base_command:
         raise ValueError("java_command cannot be empty.")
     return [*base_command, "-jar", str(jar_path)]
+
+
+def _write_game_launch_debug_log(config: LauncherConfig, game: GameEntry, command: list[str]) -> None:
+    debug_log_path = config.bridge_log_path.parent / "game_launch.log"
+
+    try:
+        debug_log_path.parent.mkdir(parents=True, exist_ok=True)
+        with debug_log_path.open("a", encoding="utf-8") as debug_log:
+            print("\n===== GAME LAUNCH DEBUG =====", file=debug_log)
+            print(f"game={game.title}", file=debug_log)
+            print(f"config.java_command={config.java_command!r}", file=debug_log)
+            print(f"command={command!r}", file=debug_log)
+            print(f"cwd={str(game.folder)!r}", file=debug_log)
+            print(f"jar_path={str(game.jar_path)!r}", file=debug_log)
+            print(f"PATH={os.environ.get('PATH')}", file=debug_log)
+            print(f"USER={os.environ.get('USER')}", file=debug_log)
+            print(f"HOME={os.environ.get('HOME')}", file=debug_log)
+            print(f"XDG_RUNTIME_DIR={os.environ.get('XDG_RUNTIME_DIR')}", file=debug_log)
+            print(f"PULSE_SERVER={os.environ.get('PULSE_SERVER')}", file=debug_log)
+
+            try:
+                java_version = subprocess.run(
+                    [*command[:-2], "-version"],
+                    capture_output=True,
+                    text=True,
+                    cwd=str(game.folder),
+                )
+            except OSError as exc:
+                print(f"java -version failed: {exc}", file=debug_log)
+            else:
+                print(f"java -version exit={java_version.returncode}", file=debug_log)
+                print("java -version stderr:", file=debug_log)
+                print(java_version.stderr, file=debug_log)
+                print("java -version stdout:", file=debug_log)
+                print(java_version.stdout, file=debug_log)
+
+            debug_log.flush()
+    except OSError:
+        return
 
 
 def _blend_color(start: tuple[int, int, int], end: tuple[int, int, int], blend: float) -> tuple[int, int, int]:
