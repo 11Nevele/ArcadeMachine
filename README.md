@@ -78,7 +78,8 @@ When production mode is enabled on Linux, the launcher starts `controller_to_key
 ## Controls
 
 - Move selection: `WASD` or arrow keys
-- Launch game: `Enter` or `Space`
+- Launch game: `Q` or `U`
+- Close running game: `Z`
 - Refresh library: `F5`
 - Exit launcher: `Esc`
 

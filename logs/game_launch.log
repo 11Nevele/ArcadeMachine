@@ -1,0 +1,138 @@
+
+===== GAME LAUNCH DEBUG =====
+game=Elite
+config.java_command='java -Dsun.java2d.opengl = True'
+command=['java', '-Dsun.java2d.opengl', '=', 'True', '-jar', 'C:\\ArcadeMachine\\games\\Elite\\Elite.jar']
+cwd='C:\\ArcadeMachine\\games\\Elite'
+jar_path='C:\\ArcadeMachine\\games\\Elite\\Elite.jar'
+PATH=C:\ArcadeMachine\venv\Scripts;C:\Program Files\PowerShell\7;c:\Users\nick.wang\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\nick.wang\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Users\nick.wang\AppData\Local\Programs\Microsoft VS Code;C:\Python313\Scripts\;C:\Python313\;C:\Program Files\National Instruments\Shared\OpenVINO\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Users\nick.wang\AppData\Local\Muse Hub\lib;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\PowerShell\7\;C:\Program Files\CMake\bin;C:\Program Files\WireGuard\;C:\Users\nick.wang\AppData\Local\Microsoft\WindowsApps;C:\Users\nick.wang\AppData\Local\Programs\Microsoft VS Code\bin;C:\ProgramData\Nick.Wang\GitHubDesktop\bin;C:\Users\nick.wang\AppData\Local\GitHubDesktop\bin;C:\Users\nick.wang\AppData\Local\Muse Hub\lib;C:\Users\nick.wang\.dotnet\tools;C:\Users\nick.wang\AppData\Roaming\npm;C:\Users\nick.wang\AppData\Local\Microsoft\WinGet\Packages\SQLite.SQLite_Microsoft.Winget.Source_8wekyb3d8bbwe;;c:\Users\nick.wang\.vscode\extensions\ms-python.debugpy-2026.6.0-win32-x64\bundled\scripts\noConfigScripts;C:\ArcadeMachine\venv\Lib\site-packages\pygame
+USER=None
+HOME=None
+XDG_RUNTIME_DIR=None
+PULSE_SERVER=None
+java -version exit=1
+java -version stderr:
+Error: Could not find or load main class =
+Caused by: java.lang.ClassNotFoundException: =
+
+java -version stdout:
+
+
+===== GAME LAUNCH DEBUG =====
+game=Elite
+config.java_command='java -Dsun.java2d.opengl = True'
+command=['java', '-Dsun.java2d.opengl', '=', 'True', '-jar', 'C:\\ArcadeMachine\\games\\Elite\\Elite.jar']
+cwd='C:\\ArcadeMachine\\games\\Elite'
+jar_path='C:\\ArcadeMachine\\games\\Elite\\Elite.jar'
+PATH=C:\ArcadeMachine\venv\Scripts;C:\Program Files\PowerShell\7;c:\Users\nick.wang\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\nick.wang\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Users\nick.wang\AppData\Local\Programs\Microsoft VS Code;C:\Python313\Scripts\;C:\Python313\;C:\Program Files\National Instruments\Shared\OpenVINO\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Users\nick.wang\AppData\Local\Muse Hub\lib;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\PowerShell\7\;C:\Program Files\CMake\bin;C:\Program Files\WireGuard\;C:\Users\nick.wang\AppData\Local\Microsoft\WindowsApps;C:\Users\nick.wang\AppData\Local\Programs\Microsoft VS Code\bin;C:\ProgramData\Nick.Wang\GitHubDesktop\bin;C:\Users\nick.wang\AppData\Local\GitHubDesktop\bin;C:\Users\nick.wang\AppData\Local\Muse Hub\lib;C:\Users\nick.wang\.dotnet\tools;C:\Users\nick.wang\AppData\Roaming\npm;C:\Users\nick.wang\AppData\Local\Microsoft\WinGet\Packages\SQLite.SQLite_Microsoft.Winget.Source_8wekyb3d8bbwe;;c:\Users\nick.wang\.vscode\extensions\ms-python.debugpy-2026.6.0-win32-x64\bundled\scripts\noConfigScripts;C:\ArcadeMachine\venv\Lib\site-packages\pygame
+USER=None
+HOME=None
+XDG_RUNTIME_DIR=None
+PULSE_SERVER=None
+java -version exit=1
+java -version stderr:
+Error: Could not find or load main class =
+Caused by: java.lang.ClassNotFoundException: =
+
+java -version stdout:
+
+
+===== GAME LAUNCH DEBUG =====
+game=Elite
+config.java_command='java -Dsun.java2d.opengl=True'
+command=['java', '-Dsun.java2d.opengl=True', '-jar', 'C:\\ArcadeMachine\\games\\Elite\\Elite.jar']
+cwd='C:\\ArcadeMachine\\games\\Elite'
+jar_path='C:\\ArcadeMachine\\games\\Elite\\Elite.jar'
+PATH=C:\ArcadeMachine\venv\Scripts;C:\Program Files\PowerShell\7;c:\Users\nick.wang\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\nick.wang\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Users\nick.wang\AppData\Local\Programs\Microsoft VS Code;C:\Python313\Scripts\;C:\Python313\;C:\Program Files\National Instruments\Shared\OpenVINO\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Users\nick.wang\AppData\Local\Muse Hub\lib;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\PowerShell\7\;C:\Program Files\CMake\bin;C:\Program Files\WireGuard\;C:\Users\nick.wang\AppData\Local\Microsoft\WindowsApps;C:\Users\nick.wang\AppData\Local\Programs\Microsoft VS Code\bin;C:\ProgramData\Nick.Wang\GitHubDesktop\bin;C:\Users\nick.wang\AppData\Local\GitHubDesktop\bin;C:\Users\nick.wang\AppData\Local\Muse Hub\lib;C:\Users\nick.wang\.dotnet\tools;C:\Users\nick.wang\AppData\Roaming\npm;C:\Users\nick.wang\AppData\Local\Microsoft\WinGet\Packages\SQLite.SQLite_Microsoft.Winget.Source_8wekyb3d8bbwe;;c:\Users\nick.wang\.vscode\extensions\ms-python.debugpy-2026.6.0-win32-x64\bundled\scripts\noConfigScripts;C:\ArcadeMachine\venv\Lib\site-packages\pygame
+USER=None
+HOME=None
+XDG_RUNTIME_DIR=None
+PULSE_SERVER=None
+java -version exit=0
+java -version stderr:
+java version "25.0.3" 2026-04-21 LTS
+Java(TM) SE Runtime Environment (build 25.0.3+9-LTS-195)
+Java HotSpot(TM) 64-Bit Server VM (build 25.0.3+9-LTS-195, mixed mode, sharing)
+
+java -version stdout:
+
+
+===== GAME LAUNCH DEBUG =====
+game=Elite
+config.java_command='java -Dsun.java2d.opengl=True'
+command=['java', '-Dsun.java2d.opengl=True', '-jar', 'C:\\ArcadeMachine\\games\\Elite\\Elite.jar']
+cwd='C:\\ArcadeMachine\\games\\Elite'
+jar_path='C:\\ArcadeMachine\\games\\Elite\\Elite.jar'
+PATH=C:\ArcadeMachine\venv\Scripts;C:\Program Files\PowerShell\7;c:\Users\nick.wang\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\nick.wang\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Users\nick.wang\AppData\Local\Programs\Microsoft VS Code;C:\Python313\Scripts\;C:\Python313\;C:\Program Files\National Instruments\Shared\OpenVINO\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Users\nick.wang\AppData\Local\Muse Hub\lib;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\PowerShell\7\;C:\Program Files\CMake\bin;C:\Program Files\WireGuard\;C:\Users\nick.wang\AppData\Local\Microsoft\WindowsApps;C:\Users\nick.wang\AppData\Local\Programs\Microsoft VS Code\bin;C:\ProgramData\Nick.Wang\GitHubDesktop\bin;C:\Users\nick.wang\AppData\Local\GitHubDesktop\bin;C:\Users\nick.wang\AppData\Local\Muse Hub\lib;C:\Users\nick.wang\.dotnet\tools;C:\Users\nick.wang\AppData\Roaming\npm;C:\Users\nick.wang\AppData\Local\Microsoft\WinGet\Packages\SQLite.SQLite_Microsoft.Winget.Source_8wekyb3d8bbwe;;c:\Users\nick.wang\.vscode\extensions\ms-python.debugpy-2026.6.0-win32-x64\bundled\scripts\noConfigScripts;C:\ArcadeMachine\venv\Lib\site-packages\pygame
+USER=None
+HOME=None
+XDG_RUNTIME_DIR=None
+PULSE_SERVER=None
+java -version exit=0
+java -version stderr:
+java version "25.0.3" 2026-04-21 LTS
+Java(TM) SE Runtime Environment (build 25.0.3+9-LTS-195)
+Java HotSpot(TM) 64-Bit Server VM (build 25.0.3+9-LTS-195, mixed mode, sharing)
+
+java -version stdout:
+
+
+===== GAME LAUNCH DEBUG =====
+game=Elite
+config.java_command='java -Dsun.java2d.opengl=True'
+command=['java', '-Dsun.java2d.opengl=True', '-jar', 'C:\\ArcadeMachine\\games\\Elite\\Elite.jar']
+cwd='C:\\ArcadeMachine\\games\\Elite'
+jar_path='C:\\ArcadeMachine\\games\\Elite\\Elite.jar'
+PATH=C:\ArcadeMachine\venv\Scripts;C:\Program Files\PowerShell\7;c:\Users\nick.wang\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\nick.wang\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Python313\Scripts\;C:\Python313\;C:\Program Files\National Instruments\Shared\OpenVINO\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Users\nick.wang\AppData\Local\Muse Hub\lib;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\PowerShell\7\;C:\Program Files\CMake\bin;C:\Program Files\WireGuard\;C:\Users\nick.wang\AppData\Local\Microsoft\WindowsApps;C:\Users\nick.wang\AppData\Local\Programs\Microsoft VS Code\bin;C:\ProgramData\Nick.Wang\GitHubDesktop\bin;C:\Users\nick.wang\AppData\Local\GitHubDesktop\bin;C:\Users\nick.wang\AppData\Local\Muse Hub\lib;C:\Users\nick.wang\.dotnet\tools;C:\Users\nick.wang\AppData\Roaming\npm;C:\Users\nick.wang\AppData\Local\Microsoft\WinGet\Packages\SQLite.SQLite_Microsoft.Winget.Source_8wekyb3d8bbwe;;c:\Users\nick.wang\.vscode\extensions\ms-python.debugpy-2026.6.0-win32-x64\bundled\scripts\noConfigScripts;C:\ArcadeMachine\venv\Lib\site-packages\pygame
+USER=None
+HOME=None
+XDG_RUNTIME_DIR=None
+PULSE_SERVER=None
+java -version exit=0
+java -version stderr:
+java version "25.0.3" 2026-04-21 LTS
+Java(TM) SE Runtime Environment (build 25.0.3+9-LTS-195)
+Java HotSpot(TM) 64-Bit Server VM (build 25.0.3+9-LTS-195, mixed mode, sharing)
+
+java -version stdout:
+
+
+===== GAME LAUNCH DEBUG =====
+game=Elite
+config.java_command='java -Dsun.java2d.opengl=True'
+command=['java', '-Dsun.java2d.opengl=True', '-jar', 'C:\\ArcadeMachine\\games\\Elite\\Elite.jar']
+cwd='C:\\ArcadeMachine\\games\\Elite'
+jar_path='C:\\ArcadeMachine\\games\\Elite\\Elite.jar'
+PATH=C:\Program Files\PowerShell\7;c:\Users\nick.wang\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\nick.wang\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Python313\Scripts\;C:\Python313\;C:\Program Files\National Instruments\Shared\OpenVINO\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Users\nick.wang\AppData\Local\Muse Hub\lib;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\PowerShell\7\;C:\Program Files\CMake\bin;C:\Program Files\WireGuard\;C:\Users\nick.wang\AppData\Local\Microsoft\WindowsApps;C:\Users\nick.wang\AppData\Local\Programs\Microsoft VS Code\bin;C:\ProgramData\Nick.Wang\GitHubDesktop\bin;C:\Users\nick.wang\AppData\Local\GitHubDesktop\bin;C:\Users\nick.wang\AppData\Local\Muse Hub\lib;C:\Users\nick.wang\.dotnet\tools;C:\Users\nick.wang\AppData\Roaming\npm;C:\Users\nick.wang\AppData\Local\Microsoft\WinGet\Packages\SQLite.SQLite_Microsoft.Winget.Source_8wekyb3d8bbwe;;c:\Users\nick.wang\.vscode\extensions\ms-python.debugpy-2026.6.0-win32-x64\bundled\scripts\noConfigScripts;C:\Users\nick.wang\AppData\Roaming\Python\Python313\site-packages\pygame
+USER=None
+HOME=None
+XDG_RUNTIME_DIR=None
+PULSE_SERVER=None
+java -version exit=0
+java -version stderr:
+java version "25.0.3" 2026-04-21 LTS
+Java(TM) SE Runtime Environment (build 25.0.3+9-LTS-195)
+Java HotSpot(TM) 64-Bit Server VM (build 25.0.3+9-LTS-195, mixed mode, sharing)
+
+java -version stdout:
+
+
+===== GAME LAUNCH DEBUG =====
+game=Elite
+config.java_command='java -Dsun.java2d.opengl=True'
+command=['java', '-Dsun.java2d.opengl=True', '-jar', 'C:\\ArcadeMachine\\games\\Elite\\Elite.jar']
+cwd='C:\\ArcadeMachine\\games\\Elite'
+jar_path='C:\\ArcadeMachine\\games\\Elite\\Elite.jar'
+PATH=C:\Program Files\PowerShell\7;c:\Users\nick.wang\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\nick.wang\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Python313\Scripts\;C:\Python313\;C:\Program Files\National Instruments\Shared\OpenVINO\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Users\nick.wang\AppData\Local\Muse Hub\lib;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\PowerShell\7\;C:\Program Files\CMake\bin;C:\Program Files\WireGuard\;C:\Users\nick.wang\AppData\Local\Microsoft\WindowsApps;C:\Users\nick.wang\AppData\Local\Programs\Microsoft VS Code\bin;C:\ProgramData\Nick.Wang\GitHubDesktop\bin;C:\Users\nick.wang\AppData\Local\GitHubDesktop\bin;C:\Users\nick.wang\AppData\Local\Muse Hub\lib;C:\Users\nick.wang\.dotnet\tools;C:\Users\nick.wang\AppData\Roaming\npm;C:\Users\nick.wang\AppData\Local\Microsoft\WinGet\Packages\SQLite.SQLite_Microsoft.Winget.Source_8wekyb3d8bbwe;;c:\Users\nick.wang\.vscode\extensions\ms-python.debugpy-2026.6.0-win32-x64\bundled\scripts\noConfigScripts;C:\Users\nick.wang\AppData\Roaming\Python\Python313\site-packages\pygame
+USER=None
+HOME=None
+XDG_RUNTIME_DIR=None
+PULSE_SERVER=None
+java -version exit=0
+java -version stderr:
+java version "25.0.3" 2026-04-21 LTS
+Java(TM) SE Runtime Environment (build 25.0.3+9-LTS-195)
+Java HotSpot(TM) 64-Bit Server VM (build 25.0.3+9-LTS-195, mixed mode, sharing)
+
+java -version stdout:
+

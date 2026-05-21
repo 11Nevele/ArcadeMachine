@@ -1,7 +1,17 @@
 #!/usr/bin/env python3
 
+import os
+from pathlib import Path
 from selectors import DefaultSelector, EVENT_READ
 from evdev import InputDevice, UInput, ecodes as e
+
+PROJECT_ROOT = Path(__file__).resolve().parent
+CLOSE_SIGNAL_PATH = Path(
+    os.getenv("ARCADE_CLOSE_SIGNAL_PATH", PROJECT_ROOT / "logs" / "close_game.signal")
+)
+GAME_RUNNING_FLAG_PATH = Path(
+    os.getenv("ARCADE_GAME_RUNNING_FLAG_PATH", PROJECT_ROOT / "logs" / "game_running.flag")
+)
 
 P1_DEVICE = "/dev/input/by-path/platform-xhci-hcd.1-usb-0:1:1.0-event-joystick"
 P2_DEVICE = "/dev/input/by-path/platform-xhci-hcd.0-usb-0:1:1.0-event-joystick"
@@ -65,6 +75,7 @@ P1_AXISMAP = {
 }
 
 pressed_keys = set()
+suppressed_keys = set()
 
 
 def key_name(code):
@@ -86,6 +97,15 @@ def emit_key(ui, key, down):
         ui.syn()
         pressed_keys.remove(key)
         print(f"UP   {key_name(key)}")
+
+
+def request_game_close():
+    try:
+        CLOSE_SIGNAL_PATH.parent.mkdir(parents=True, exist_ok=True)
+        CLOSE_SIGNAL_PATH.touch(exist_ok=True)
+        print("CLOSE current game")
+    except OSError as exc:
+        print(f"Unable to write close signal: {exc}")
 
 
 def handle_axis(dev, ui, event, axismap):
@@ -112,9 +132,19 @@ def handle_event(dev, ui, event, keymap, axismap, player_name):
             target_key = keymap[event.code]
 
             if event.value == 1:
+                if target_key == e.KEY_Z and GAME_RUNNING_FLAG_PATH.exists():
+                    suppressed_keys.add(target_key)
+                    print(f"{player_name} ", end="")
+                    request_game_close()
+                    return
+
                 print(player_name, end=" ")
                 emit_key(ui, target_key, True)
             elif event.value == 0:
+                if target_key in suppressed_keys:
+                    suppressed_keys.discard(target_key)
+                    return
+
                 print(player_name, end=" ")
                 emit_key(ui, target_key, False)
 

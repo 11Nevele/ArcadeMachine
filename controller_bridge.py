@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 import subprocess
 from typing import TextIO
@@ -61,11 +62,19 @@ class ControllerBridgeManager:
             self.config.python_command,
             str(controller_script),
         ]
+        bridge_env = os.environ.copy()
+        bridge_env["ARCADE_CLOSE_SIGNAL_PATH"] = str(
+            self.config.bridge_log_path.parent / "close_game.signal"
+        )
+        bridge_env["ARCADE_GAME_RUNNING_FLAG_PATH"] = str(
+            self.config.bridge_log_path.parent / "game_running.flag"
+        )
 
         try:
             self.process = subprocess.Popen(
                 command,
                 cwd=str(self.config.project_root),
+                env=bridge_env,
                 stdout=self.log_handle if self.log_handle is not None else subprocess.DEVNULL,
                 stderr=subprocess.STDOUT if self.log_handle is not None else subprocess.DEVNULL,
                 text=True,

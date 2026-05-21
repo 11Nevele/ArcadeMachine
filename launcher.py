@@ -62,7 +62,7 @@ class ArcadeLauncherApp:
         self.bridge_manager = bridge_manager
         self.selected_index = 0
         self.scroll_row = 0
-        self.status_message = "Use WASD or the arrow keys to browse the library."
+        self.status_message = "Use WASD or the arrow keys to browse the library, then press Q or U to launch."
         self.running = True
         self.thumbnail_cache: dict[tuple[str, tuple[int, int]], "pygame.Surface"] = {}
         self.scan_result = LibraryScanResult(games=[], warnings=[])
@@ -138,7 +138,7 @@ class ArcadeLauncherApp:
             self._move_selection(-self.layout.columns)
         elif event.key in (pygame.K_DOWN, pygame.K_s):
             self._move_selection(self.layout.columns)
-        elif event.key in (pygame.K_RETURN, pygame.K_KP_ENTER, pygame.K_SPACE):
+        elif event.key in (pygame.K_q, pygame.K_u):
             self._launch_selected_game()
         elif event.key == pygame.K_F5:
             self.refresh_library(keep_message=False)
@@ -174,6 +174,11 @@ class ArcadeLauncherApp:
             self.status_message = "No games are available yet. Add a game folder to the library root."
             return
 
+        close_signal_path = _get_close_game_signal_path(self.config)
+        game_running_flag_path = _get_game_running_flag_path(self.config)
+        _clear_runtime_signal(close_signal_path)
+        _clear_runtime_signal(game_running_flag_path)
+
         try:
             command = _build_java_command(self.config.java_command, game.jar_path, self.config.is_windows)
         except ValueError as exc:
@@ -200,26 +205,49 @@ class ArcadeLauncherApp:
             self.status_message = f"Failed to launch {game.title}: {exc}"
             return
 
+        _write_runtime_signal(game_running_flag_path)
         pygame.display.iconify()
+
+        terminated_by_launcher = False
 
         try:
             while process.poll() is None and self.running:
+                if close_signal_path.exists():
+                    _clear_runtime_signal(close_signal_path)
+                    self.status_message = f"Closing {game.title}..."
+                    self._draw()
+                    pygame.display.flip()
+                    _terminate_process(process)
+                    terminated_by_launcher = True
+                    continue
+
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
-                        process.terminate()
+                        _terminate_process(process)
                         self.running = False
+                    elif event.type == pygame.KEYDOWN and event.key == pygame.K_z:
+                        self.status_message = f"Closing {game.title}..."
+                        self._draw()
+                        pygame.display.flip()
+                        _terminate_process(process)
+                        terminated_by_launcher = True
+                        break
                 self.clock.tick(10)
 
             exit_code = process.poll()
             if exit_code is None:
                 exit_code = process.wait()
         finally:
+            _clear_runtime_signal(game_running_flag_path)
+            _clear_runtime_signal(close_signal_path)
             self._restore_audio(mixer_state)
 
         self._create_display()
         self.refresh_library(keep_message=True)
 
-        if exit_code == 0:
+        if terminated_by_launcher:
+            self.status_message = f"{game.title} closed with Z. Returning to the selector."
+        elif exit_code == 0:
             self.status_message = f"{game.title} closed. Returning to the selector."
         else:
             self.status_message = f"{game.title} exited with code {exit_code}."
@@ -454,7 +482,7 @@ class ArcadeLauncherApp:
         bridge_surface = self.small_font.render(self.bridge_manager.last_status, True, TEXT_MUTED)
         self.screen.blit(bridge_surface, (self.layout.footer_rect.x + 24, self.layout.footer_rect.y + 36))
 
-        controls_text = "Move: WASD / Arrows   Launch: Enter / Space   Refresh: F5   Exit: Esc"
+        controls_text = "Move: WASD / Arrows   Launch: Q / U   Close Game: Z   Refresh: F5   Exit: Esc"
         controls_surface = self.small_font.render(controls_text, True, TEXT_MUTED)
         self.screen.blit(
             controls_surface,
@@ -651,6 +679,41 @@ def _build_java_command(java_command: str, jar_path: Path, is_windows: bool) -> 
     if not base_command:
         raise ValueError("java_command cannot be empty.")
     return [*base_command, "-jar", str(jar_path)]
+
+
+def _get_close_game_signal_path(config: LauncherConfig) -> Path:
+    return config.bridge_log_path.parent / "close_game.signal"
+
+
+def _get_game_running_flag_path(config: LauncherConfig) -> Path:
+    return config.bridge_log_path.parent / "game_running.flag"
+
+
+def _write_runtime_signal(path: Path) -> None:
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.touch(exist_ok=True)
+    except OSError:
+        return
+
+
+def _clear_runtime_signal(path: Path) -> None:
+    try:
+        path.unlink(missing_ok=True)
+    except OSError:
+        return
+
+
+def _terminate_process(process: subprocess.Popen[object]) -> None:
+    if process.poll() is not None:
+        return
+
+    process.terminate()
+    try:
+        process.wait(timeout=3)
+    except subprocess.TimeoutExpired:
+        process.kill()
+        process.wait(timeout=3)
 
 
 def _write_game_launch_debug_log(config: LauncherConfig, game: GameEntry, command: list[str]) -> None:
